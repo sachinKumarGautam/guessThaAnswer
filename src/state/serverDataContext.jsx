@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 
-const ServerDataContext = React.createContext();
+const ServerDataContext = React.createContext(null);
 
 export const ServerDataProvider = props => {
   const value = useMemo(() => {

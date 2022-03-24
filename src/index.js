@@ -1,6 +1,7 @@
 if (browserSupportsAllFeatures()) {
   runMain();
 } else {
+  //@ts-ignore
   loadScript(window.__ASSET_MANIFEST__['polyfills.js'], runMain);
 }
 
@@ -13,6 +14,7 @@ function browserSupportsAllFeatures() {
   return window.Promise && Object.assign;
 }
 
+//@ts-ignore
 function loadScript(src, done) {
   const script = document.createElement('script');
 

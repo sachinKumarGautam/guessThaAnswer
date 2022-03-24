@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
 
-import App from '../src/components/App';
+import App from '../src/App';
 import { fetchDataForRender } from './fetchDataForRender';
 import { indexHtml } from './indexHtml';
 import stats from '../build/react-loadable.json';
@@ -15,7 +15,7 @@ const ServerApp = ({ context, data, location }) => {
   return (
     <ServerDataProvider value={data}>
       <StaticRouter location={location} context={context}>
-        <App />
+        <App userName="hey" lang="bhailang" />
       </StaticRouter>
     </ServerDataProvider>
   );
@@ -37,10 +37,14 @@ function renderApp(ServerApp, data, req, res) {
     </Loadable.Capture>
   );
 
+  //@ts-ignore
   if (context.url) {
+    //@ts-ignore
     res.redirect(context.url);
   } else {
+    //@ts-ignore
     const fullMarkup = indexHtml({
+      //@ts-ignore
       helmet: Helmet.renderStatic(),
       serverData: data,
       bundles: getBundles(stats, modules),

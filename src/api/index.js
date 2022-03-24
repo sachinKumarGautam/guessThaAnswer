@@ -1,9 +1,11 @@
 import { httpClient } from './httpClient';
+import { questionsApi } from './questionsApi';
 import { todosApi } from './todosApi';
 
 export function apiFactory(http) {
   return {
-    todos: todosApi(http)
+    todos: todosApi(http),
+    questions: questionsApi(http)
   };
 }
 

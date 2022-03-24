@@ -40,6 +40,10 @@ module.exports = function(envType) {
         main: resolvePath('../src/index.js')
       };
 
+  config.resolve = {
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
+  };
+
   config.output = IS_DEV
     ? {
         path: resolvePath('../build'),
@@ -57,6 +61,14 @@ module.exports = function(envType) {
   config.module = {
     rules: [
       // ESLint
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          configFile: 'tsconfig.client.json'
+        }
+      },
       {
         test: /\.(js|jsx)$/,
         enforce: 'pre',

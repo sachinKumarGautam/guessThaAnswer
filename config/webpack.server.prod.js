@@ -25,8 +25,19 @@ module.exports = {
     publicPath: PUBLIC_URL + '/',
     libraryTarget: 'commonjs2'
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
+  },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          configFile: 'tsconfig.server.json'
+        }
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

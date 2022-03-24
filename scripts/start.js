@@ -28,7 +28,7 @@ const {
 
 const { applyDevMiddleware } = require('./utils/devMiddleware');
 const { purgeCacheOnChange } = require('./utils/purgeCacheOnChange');
-
+const { init } = require('../server/dbConnection');
 process.on('unhandledRejection', err => {
   throw err;
 });
@@ -50,13 +50,14 @@ server.use((req, res) => {
   app(req, res);
 });
 
-choosePort(HOST, DEFAULT_PORT).then(port => {
+choosePort(HOST, DEFAULT_PORT).then(async port => {
   if (!port) {
     return;
   }
 
   const urls = prepareUrls('http', HOST, port);
-
+  require('dotenv').config();
+  // await init();
   server.listen(port, HOST, err => {
     if (err) {
       return console.log(err);

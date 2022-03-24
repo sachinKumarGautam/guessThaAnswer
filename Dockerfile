@@ -18,6 +18,6 @@ WORKDIR /react-ssr-boilerplate
 
 COPY --from=build /react-ssr-boilerplate .
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["npm", "run", "start:prod"]
