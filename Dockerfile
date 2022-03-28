@@ -1,7 +1,7 @@
 # build ===============================
-FROM node:10 as build
+FROM node:16 as build
 
-WORKDIR /react-ssr-boilerplate
+WORKDIR /guessitapp
 
 COPY package*.json ./
 
@@ -12,12 +12,12 @@ COPY . .
 RUN npm run build
 
 # run ===============================
-FROM node:10-alpine as run
+FROM node:16-alpine as run
 
-WORKDIR /react-ssr-boilerplate
+WORKDIR /guessitapp
 
-COPY --from=build /react-ssr-boilerplate .
+COPY --from=build /guessitapp .
 
-EXPOSE 3001
+EXPOSE 3000
 
 CMD ["npm", "run", "start:prod"]

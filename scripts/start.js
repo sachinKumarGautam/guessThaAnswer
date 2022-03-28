@@ -50,34 +50,35 @@ server.use((req, res) => {
   app(req, res);
 });
 
-choosePort(HOST, DEFAULT_PORT).then(async port => {
-  if (!port) {
-    return;
+// choosePort(HOST, DEFAULT_PORT).then(async port => {
+//   console.log('sachinkr', port);
+//   if (!port) {
+//     return;
+//   }
+
+const urls = prepareUrls('http', HOST, DEFAULT_PORT);
+require('dotenv').config();
+// await init();
+server.listen(DEFAULT_PORT, HOST, err => {
+  if (err) {
+    return console.log(err);
   }
 
-  const urls = prepareUrls('http', HOST, port);
-  require('dotenv').config();
-  // await init();
-  server.listen(port, HOST, err => {
-    if (err) {
-      return console.log(err);
-    }
+  if (isInteractive) {
+    clearConsole();
+  }
 
-    if (isInteractive) {
-      clearConsole();
-    }
+  console.log(chalk.white('\n\tStarting dev server...'));
 
-    console.log(chalk.white('\n\tStarting dev server...'));
+  openBrowser(urls.localUrlForBrowser);
 
-    openBrowser(urls.localUrlForBrowser);
+  purgeCacheOnChange(path.resolve(__dirname, '../'));
 
-    purgeCacheOnChange(path.resolve(__dirname, '../'));
-
-    console.log(
-      chalk.blue(`
+  console.log(
+    chalk.blue(`
         Running locally at ${urls.localUrlForBrowser}
-        Running on your network at ${urls.lanUrlForConfig}:${port}
+        Running on your network at ${urls.lanUrlForConfig}:${DEFAULT_PORT}
       `)
-    );
-  });
+  );
 });
+// });

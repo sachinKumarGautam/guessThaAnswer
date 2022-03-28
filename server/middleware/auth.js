@@ -8,7 +8,6 @@ const verifyToken = (req, res, next) => {
   if (req.headers.authorization) {
     bearerToken = req.headers.authorization.replace('Bearer ', '');
   }
-  console.log(req.body);
   const token =
     req.body.token ||
     req.query.token ||

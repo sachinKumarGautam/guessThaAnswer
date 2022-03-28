@@ -14,6 +14,7 @@ const { PUBLIC_URL = '' } = process.env;
 
 // This export is used by our initialization code in /scripts
 export const app = express();
+init();
 //@ts-ignore
 app.use(compression());
 app.use(helmet());

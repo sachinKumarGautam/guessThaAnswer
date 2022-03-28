@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 const connectionUrl =
   'mongodb+srv://sachin-new:sachin007@cluster0.7h3cv.mongodb.net/healthapp-backend-new?authSource=admin&replicaSet=atlas-cyj5rm-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true';
@@ -46,7 +46,7 @@ const getQuestions = async () => {
 
 const updateQuestion = (id, quantity) => {
   const collection = db.collection('items');
-  return collection.updateOne({ _id: ObjectId(id) }, { $inc: { quantity } });
+  // return collection.updateOne({ _id: ObjectId(id) }, { $inc: { quantity } });
 };
 
 const findUser = async email => {
@@ -55,7 +55,7 @@ const findUser = async email => {
   // return collection.updateOne({ _id: ObjectId(id) }, { $inc: { quantity } });
 };
 
-module.exports = {
+export {
   init,
   insertQuestion,
   getQuestions,
